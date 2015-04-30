@@ -211,13 +211,13 @@ public class Xmler {
 	 */
 	private void processRows(XSSFSheet sheet, List<String> headers, Element rootElement, Document doc, Boolean removeEmptyTags){
 		int numRows = sheet.getPhysicalNumberOfRows();
-		System.out.println( "Number of rows = " + numRows);
+		System.out.println( "Total rows found = " + numRows);
 
-		for(int rowIndex = 2; rowIndex < numRows; rowIndex++){ // we skip the first row - 
-			//this switches to using logical rows (starts at 1)
-			// where physical rows starts at zero so we start at two and go from there
+		int counter = 0;
+		for(int rowIndex = 1; rowIndex < numRows; rowIndex++){ 
 			Row aRow = sheet.getRow(rowIndex);
 			if( aRow != null ){
+				counter += 1;
 				Element rowElement = doc.createElement("row");
 				rootElement.appendChild(rowElement);
 				
@@ -240,6 +240,7 @@ public class Xmler {
 				}
 			} 
 		}
+		System.out.println("Header skipped - processed " + counter + " rows ");
 	}
 	
 	
